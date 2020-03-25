@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://393407505.github.io">
-  <title>Tag: 随笔 | 清枫寒漓</title>
+  <title>Java_Servlet | 清枫寒漓</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="计算机知识学习记录，树洞，代码编程，C语言，Java，java web等">
-<meta property="og:type" content="website">
-<meta property="og:title" content="清枫寒漓">
-<meta property="og:url" content="https://393407505.github.io/tags/%E9%9A%8F%E7%AC%94/index.html">
+  <meta name="description" content="##Servlet 概念: 运行在服务器端的小程序步骤执行原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java_Servlet">
+<meta property="og:url" content="https://393407505.github.io/2020/03/25/Java-Servlet/index.html">
 <meta property="og:site_name" content="清枫寒漓">
-<meta property="og:description" content="计算机知识学习记录，树洞，代码编程，C语言，Java，java web等">
+<meta property="og:description" content="##Servlet 概念: 运行在服务器端的小程序步骤执行原理">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-25T14:29:02.000Z">
+<meta property="article:modified_time" content="2020-03-25T14:32:30.010Z">
 <meta property="article:author" content="寒漓">
+<meta property="article:tag" content="javaweb">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="清枫寒漓" type="application/atom+xml">
@@ -157,60 +160,211 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java-Servlet" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/16/My-First-Blog/" class="archive-article-date">
-  	<time datetime="2020-03-16T05:52:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/16/My-First-Blog/">My First Blog</a>
+    <h1 class="article-title" itemprop="name">
+      Java_Servlet
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/03/25/Java-Servlet/" class="archive-article-date">
+  	<time datetime="2020-03-25T14:29:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Servlet</p>
+<h1 id="概念-运行在服务器端的小程序"><a href="#概念-运行在服务器端的小程序" class="headerlink" title="概念: 运行在服务器端的小程序"></a>概念: 运行在服务器端的小程序</h1><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h1 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h1><a id="more"></a>
+
+<p>通过web.xml配置servlet：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">  		&lt;servlet-name&gt;demo1&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  		&lt;servlet-class&gt;servletstudy.servletDemo1&lt;&#x2F;servlet-class&gt;</span><br><span class="line">&lt;&#x2F;servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">  		&lt;servlet-name&gt;demo1&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  		&lt;url-pattern&gt;&#x2F;servletDemo1&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p>执行过程：<br>    - 当服务器接收到客户端浏览器的请求后，会解析url的路径，获取访问Servlet的路径<br>    - 查找web.xml文件，是否有对应的<url-pattern>内容。<br>    - 如果有，则再找对应的全类名。<servlet-class><br>    - tomcat会将字节码文件加载进内存，并为其创建对象。<br>    - 调用其方法。</p>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>五个方法：</p>
+<ol>
+<li>创建public void init(ServletConfig servletConfig) 初始化方法，当servlet服务第一次被调用时执行。同时也可以手动配置init方法的执行时机。<ul>
+<li>在web.xm文件下通过标签进行配置。<br>  <load-on-startup>-1</load-on-startup>当值为负数时，第一次被访问时就执行，当值为正数或0时，在服务器启动时便被调用。</li>
+</ul>
+</li>
+<li>提供服务public void service(ServletRequest servletRequest, ServletResponse servletResponse)每次访问Servlet时都会被执行。</li>
+<li>被销毁public void destroy() 只有当服务器正常关闭时，才会被调用。通常用于释放资源。</li>
+<li>public String getServletInfo()</li>
+<li>public ServletConfig getServletConfig()</li>
+</ol>
+<h1 id="Servlet3-0注解配置"><a href="#Servlet3-0注解配置" class="headerlink" title="Servlet3.0注解配置"></a>Servlet3.0注解配置</h1><p>在servlet3.0及以上版本，可以通过注解配置执行。</p>
+<p>方式：在类前加@WebServlet(“/名称”)即可，名称即为访问路径</p>
+<ul>
+<li>一个servlet可以定义多个访问路径：@WebServlet({“/名称1”,”名称2”,”名称3”})</li>
+<li>路径定义规则：<ol>
+<li>/xxx 路径匹配</li>
+<li>/xxx/xxx 多重路径，目录结构</li>
+<li>*.do 扩展名匹配，注意没有“/”</li>
+</ol>
+</li>
+</ul>
+<p>Webservlet类结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface WebServlet &#123;</span><br><span class="line">    String name() default &quot;&quot;;相当于&lt;servlet-name&gt;</span><br><span class="line"></span><br><span class="line">    String[] value() default &#123;&#125;;代表urlpatterns（）的属性配置</span><br><span class="line"></span><br><span class="line">    String[] urlPatterns() default &#123;&#125;;相当于&lt;url-pattern&gt;</span><br><span class="line"></span><br><span class="line">    int loadOnStartup() default -1;相当于&lt;load-on-startup&gt;</span><br><span class="line"></span><br><span class="line">    WebInitParam[] initParams() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    boolean asyncSupported() default false;</span><br><span class="line"></span><br><span class="line">    String smallIcon() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String largeIcon() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String description() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String displayName() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Servlet体系结构"><a href="#Servlet体系结构" class="headerlink" title="Servlet体系结构"></a>Servlet体系结构</h1><p>Servlet–Defines methods that all servlets must implement. 定义所有servlet必须实现的方法<br>两个继承自Servlet的接口</p>
+<ol>
+<li>GenericServlet：<br> 将继承自Servlet的其他方法做了默认为空的实现。只将service方法作为抽象方法</li>
+<li>HttpServlet：对http协议的一种封装，简化操作<br> 主要方法：doGet() doPost()</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">javaweb</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://393407505.github.io/2020/03/25/Java-Servlet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/03/25/Http%E8%AF%A6%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Http详解
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/03/25/Java%E5%8F%8D%E5%B0%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java反射</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -233,9 +387,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
