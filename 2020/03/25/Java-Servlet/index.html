@@ -16,7 +16,7 @@
 <meta property="og:description" content="##Servlet 概念: 运行在服务器端的小程序步骤执行原理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-25T14:29:02.000Z">
-<meta property="article:modified_time" content="2020-03-25T14:32:30.010Z">
+<meta property="article:modified_time" content="2020-03-25T15:00:06.993Z">
 <meta property="article:author" content="寒漓">
 <meta property="article:tag" content="javaweb">
 <meta name="twitter:card" content="summary">
@@ -182,24 +182,29 @@
       
         <p>##Servlet</p>
 <h1 id="概念-运行在服务器端的小程序"><a href="#概念-运行在服务器端的小程序" class="headerlink" title="概念: 运行在服务器端的小程序"></a>概念: 运行在服务器端的小程序</h1><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h1 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h1><a id="more"></a>
-
 <p>通过web.xml配置servlet：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">  		&lt;servlet-name&gt;demo1&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  		&lt;servlet-class&gt;servletstudy.servletDemo1&lt;&#x2F;servlet-class&gt;</span><br><span class="line">&lt;&#x2F;servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">  		&lt;servlet-name&gt;demo1&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  		&lt;url-pattern&gt;&#x2F;servletDemo1&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
 
-<p>执行过程：<br>    - 当服务器接收到客户端浏览器的请求后，会解析url的路径，获取访问Servlet的路径<br>    - 查找web.xml文件，是否有对应的<url-pattern>内容。<br>    - 如果有，则再找对应的全类名。<servlet-class><br>    - tomcat会将字节码文件加载进内存，并为其创建对象。<br>    - 调用其方法。</p>
+<p>执行过程：</p>
+<ul>
+<li>当服务器接收到客户端浏览器的请求后，会解析url的路径，获取访问Servlet的路径</li>
+<li>查找web.xml文件，是否有对应的<url-pattern>内容。</li>
+<li>如果有，则再找对应的全类名。<servlet-class></li>
+<li>tomcat会将字节码文件加载进内存，并为其创建对象。</li>
+<li>调用其方法。</li>
+</ul>
 <h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>五个方法：</p>
-<ol>
+<ul>
 <li>创建public void init(ServletConfig servletConfig) 初始化方法，当servlet服务第一次被调用时执行。同时也可以手动配置init方法的执行时机。<ul>
-<li>在web.xm文件下通过标签进行配置。<br>  <load-on-startup>-1</load-on-startup>当值为负数时，第一次被访问时就执行，当值为正数或0时，在服务器启动时便被调用。</li>
+<li>在web.xm文件下通过标签进行配置。<br>  <code>&lt;load-on-startup&gt;-1&lt;/load-on-startup&gt;</code><br>当值为负数时，第一次被访问时就执行，当值为正数或0时，在服务器启动时便被调用。</li>
 </ul>
 </li>
 <li>提供服务public void service(ServletRequest servletRequest, ServletResponse servletResponse)每次访问Servlet时都会被执行。</li>
 <li>被销毁public void destroy() 只有当服务器正常关闭时，才会被调用。通常用于释放资源。</li>
 <li>public String getServletInfo()</li>
 <li>public ServletConfig getServletConfig()</li>
-</ol>
-<h1 id="Servlet3-0注解配置"><a href="#Servlet3-0注解配置" class="headerlink" title="Servlet3.0注解配置"></a>Servlet3.0注解配置</h1><p>在servlet3.0及以上版本，可以通过注解配置执行。</p>
-<p>方式：在类前加@WebServlet(“/名称”)即可，名称即为访问路径</p>
+</ul>
+<h1 id="Servlet3-0注解配置"><a href="#Servlet3-0注解配置" class="headerlink" title="Servlet3.0注解配置"></a>Servlet3.0注解配置</h1><p>在servlet3.0及以上版本，可以通过注解配置执行。<br>方式：在类前加@WebServlet(“/名称”)即可，名称即为访问路径</p>
 <ul>
 <li>一个servlet可以定义多个访问路径：@WebServlet({“/名称1”,”名称2”,”名称3”})</li>
 <li>路径定义规则：<ol>
@@ -210,12 +215,14 @@
 </li>
 </ul>
 <p>Webservlet类结构如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface WebServlet &#123;</span><br><span class="line">    String name() default &quot;&quot;;相当于&lt;servlet-name&gt;</span><br><span class="line"></span><br><span class="line">    String[] value() default &#123;&#125;;代表urlpatterns（）的属性配置</span><br><span class="line"></span><br><span class="line">    String[] urlPatterns() default &#123;&#125;;相当于&lt;url-pattern&gt;</span><br><span class="line"></span><br><span class="line">    int loadOnStartup() default -1;相当于&lt;load-on-startup&gt;</span><br><span class="line"></span><br><span class="line">    WebInitParam[] initParams() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    boolean asyncSupported() default false;</span><br><span class="line"></span><br><span class="line">    String smallIcon() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String largeIcon() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String description() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    String displayName() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface WebServlet &#123;</span><br><span class="line">    String name() default &quot;&quot;;相当于&lt;servlet-name&gt;</span><br><span class="line">    String[] value() default &#123;&#125;;代表urlpatterns（）的属性配置</span><br><span class="line">    String[] urlPatterns() default &#123;&#125;;相当于&lt;url-pattern&gt;</span><br><span class="line">    int loadOnStartup() default -1;相当于&lt;load-on-startup&gt;</span><br><span class="line">    WebInitParam[] initParams() default &#123;&#125;;</span><br><span class="line">    boolean asyncSupported() default false;</span><br><span class="line">    String smallIcon() default &quot;&quot;;</span><br><span class="line">    String largeIcon() default &quot;&quot;;</span><br><span class="line">    String description() default &quot;&quot;;</span><br><span class="line">    String displayName() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Servlet体系结构"><a href="#Servlet体系结构" class="headerlink" title="Servlet体系结构"></a>Servlet体系结构</h1><p>Servlet–Defines methods that all servlets must implement. 定义所有servlet必须实现的方法<br>两个继承自Servlet的接口</p>
-<ol>
-<li>GenericServlet：<br> 将继承自Servlet的其他方法做了默认为空的实现。只将service方法作为抽象方法</li>
-<li>HttpServlet：对http协议的一种封装，简化操作<br> 主要方法：doGet() doPost()</li>
-</ol>
+<ul>
+<li><p>GenericServlet：<br> 将继承自Servlet的其他方法做了默认为空的实现。只将service方法作为抽象方法</p>
+</li>
+<li><p>HttpServlet：对http协议的一种封装，简化操作<br> 主要方法：doGet() doPost()</p>
+</li>
+</ul>
 
       
 
