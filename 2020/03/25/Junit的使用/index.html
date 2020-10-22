@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://393407505.github.io">
   <title>Junit的使用 | 清枫寒漓</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Junit测试分类:  黑盒测试:不需要写代码，给定输入值，看程序能否给出期望的输出值 白盒测试：需要写代码，关注程序的具体流程  Junit的使用">
+  <meta name="description" content="JunitJunit的使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Junit的使用">
 <meta property="og:url" content="https://393407505.github.io/2020/03/25/Junit%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="清枫寒漓">
-<meta property="og:description" content="Junit测试分类:  黑盒测试:不需要写代码，给定输入值，看程序能否给出期望的输出值 白盒测试：需要写代码，关注程序的具体流程  Junit的使用">
+<meta property="og:description" content="JunitJunit的使用">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-25T14:08:05.000Z">
-<meta property="article:modified_time" content="2020-03-25T15:03:02.009Z">
+<meta property="article:modified_time" content="2020-10-22T14:22:25.065Z">
 <meta property="article:author" content="寒漓">
 <meta property="article:tag" content="javaweb">
 <meta name="twitter:card" content="summary">
@@ -180,17 +180,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Junit"><a href="#Junit" class="headerlink" title="Junit"></a>Junit</h2><p>测试分类:</p>
+        <h2 id="Junit"><a href="#Junit" class="headerlink" title="Junit"></a>Junit</h2><p>Junit的使用</p>
+<a id="more"></a>
+
+<p>#测试分类:</p>
 <ul>
 <li>黑盒测试:不需要写代码，给定输入值，看程序能否给出期望的输出值</li>
 <li>白盒测试：需要写代码，关注程序的具体流程</li>
 </ul>
-<p>Junit的使用</p>
-<a id="more"></a>
 <p>1.定义一个测试类（测试用例）<br>    建议测试类名为：被测试类的名+test</p>
 <p>2.定义测试方法：可以独立执行<br>    建议方法名为：被测试方法名+test<br>        返回值： void<br>        参数列表：空参</p>
 <p>3.判定结果：绿色-通过 红色-失败<br>      使用断言操作判定结果</p>
-<p>Assert断言</p>
+<p>#Assert断言</p>
 <ul>
 <li>断言相等：assertEquals（100，x）</li>
 <li>断言数组相等： assertArrayEquals（｛1,2,3｝，x）</li>
@@ -199,7 +200,7 @@
 <li>断言为true、false：assertTrue（x&gt;0）assertFalse(x&lt;0) </li>
 <li>assertNotEquals()/assertNotNull()</li>
 </ul>
-<p>Junit Fixture：初始化测试资源成为Fixture</p>
+<p>#Junit Fixture：初始化测试资源成为Fixture</p>
 <ul>
 <li>@Before：初始化测试对象，例如：input=new FileInputStream（）；</li>
 <li>@After：销毁@Before创建的资源，例如input.close（）</li>
